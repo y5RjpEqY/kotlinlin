@@ -1,0 +1,25 @@
+*.iml
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+
+
+# IntelliJ IDEA project files
+.idea/
+*.ipr
+*.iml
+
+
+.gitignore
+app/
+build.gradle
+gradle.properties
+gradle/
+gradlew
+gradlew.bat
+settings.gradle
