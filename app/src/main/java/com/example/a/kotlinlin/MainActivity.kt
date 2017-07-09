@@ -12,15 +12,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var sum = 0
+        var 😀 = 0
         var button = findViewById(R.id.button) as Button
         var textView = findViewById(R.id.tv1) as TextView
-        textView.text = sum.toString()
+        textView.text = 😀.toString()
 
         button.setOnClickListener { view ->
-            sum ++
-            textView.setText(sum.toString())
-            Log.d("Test",sum.toString())
+            😀 ++
+            textView.setText(😀.toString())
+            Log.d("Test",😀.toString())
         }
     }
 }
