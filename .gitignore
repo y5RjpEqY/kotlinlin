@@ -16,10 +16,11 @@
 
 
 .gitignore
-app/
 build.gradle
 gradle.properties
 gradle/
 gradlew
 gradlew.bat
 settings.gradle
+Kotlinlin.xd
+Kotlinlin_tab_ver.xd
