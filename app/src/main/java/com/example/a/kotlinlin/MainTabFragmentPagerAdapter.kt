@@ -13,6 +13,8 @@ class MainTabFragmentPagerAdapter(fm : FragmentManager) : FragmentPagerAdapter(f
     }
 
     override fun getItem(position: Int): Fragment {
+//        positionによってデータを検索し
+//        Listにする
         return MainTabFragment.newInstance()
     }
 
