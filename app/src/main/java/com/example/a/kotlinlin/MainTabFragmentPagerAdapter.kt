@@ -1,6 +1,6 @@
 package com.example.a.kotlinlin
 
-import android.support.v4.app.Fragment
+import android.support.v4.app.ListFragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 
@@ -12,10 +12,10 @@ class MainTabFragmentPagerAdapter(fm : FragmentManager) : FragmentPagerAdapter(f
         return 3
     }
 
-    override fun getItem(position: Int): Fragment {
+    override fun getItem(position: Int): ListFragment {
 //        positionによってデータを検索し
 //        Listにする
-        return MainTabFragment.newInstance()
+        return ItemListFragment.newInstance()
     }
 
     override fun getPageTitle(position: Int): CharSequence {

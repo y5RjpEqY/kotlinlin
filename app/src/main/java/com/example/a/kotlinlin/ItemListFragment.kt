@@ -1,7 +1,10 @@
 package com.example.a.kotlinlin
 
-import android.app.ListFragment
+import android.support.v4.app.ListFragment
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 
 /**
  * Created by a on 2017/07/14.
@@ -20,5 +23,10 @@ class ItemListFragment : ListFragment(){
         super.onCreate(savedInstanceState)
         adapter = ItemListAdapter(activity)
         listAdapter = adapter
+        adapter.add("add")
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_main_tab, container, false)
     }
 }
