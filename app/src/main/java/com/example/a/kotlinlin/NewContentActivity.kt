@@ -21,24 +21,25 @@ class NewContentActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_content)
 
-        datebtn.setOnClickListener{
+        date_btn.setOnClickListener{
             val newFragment = DatePick.newInstance()
             newFragment.setListener(DatePickerDialog.OnDateSetListener(fun(_: DatePicker?, year_tmp: Int, month_tmp: Int, day_tmp: Int){
                 year = year_tmp
                 month = month_tmp + 1
                 day = day_tmp
                 Log.w("date test","year = "+ year + " month = "+ month + " day = " + day)
+                date_tv.text = "" + year + "/" + month + "/" + day
             }))
             newFragment.show(supportFragmentManager, "datePicker")
         }
 
-        timebtm.setOnClickListener{
+        time_btm.setOnClickListener{
             val newFragment = TimePick.newInstance()
             newFragment.setListener(TimePickerDialog.OnTimeSetListener(fun(_: TimePicker?, hour_tmp: Int, minute_tmp: Int){
                 hour = hour_tmp
                 minute = minute_tmp
                 Log.w("time test","hour = "+ hour + " minute = "+ minute)
-
+                time_tv.text = "" + hour + ":" + String.format("%02d",minute)
             }))
             newFragment.show(supportFragmentManager, "timePicker")
         }
@@ -48,7 +49,7 @@ class NewContentActivity : AppCompatActivity() {
 
     private fun createSpinner(){
         var list = ArrayList<String>()
-//        Tagオブジェクトから取得
+//        TODO Tagオブジェクトから取得
         list.add("選択項目: 1")
         list.add("選択項目: 2")
         list.add("選択項目: 3")
