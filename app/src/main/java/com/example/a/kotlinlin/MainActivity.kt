@@ -1,5 +1,6 @@
 package com.example.a.kotlinlin
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.view.ViewPager
@@ -24,9 +25,15 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        val manager = getSupportFragmentManager()
+        val manager = supportFragmentManager
         val pagerAdapter = MainTabFragmentPagerAdapter(manager)
         viewPager.adapter = pagerAdapter
+
+        floatingActionButton.setOnClickListener{
+            val intent = Intent(this,NewContentActivity::class.java)
+            startActivity(intent)
+        }
+
 
 
 
