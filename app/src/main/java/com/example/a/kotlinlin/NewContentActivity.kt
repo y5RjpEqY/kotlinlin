@@ -44,6 +44,10 @@ class NewContentActivity : AppCompatActivity() {
             newFragment.show(supportFragmentManager, "timePicker")
         }
 
+        add_btn.setOnClickListener{
+//            TODO 各データのバリデーション後、Realmオブジェクトに保存
+        }
+
         createSpinner()
     }
 
