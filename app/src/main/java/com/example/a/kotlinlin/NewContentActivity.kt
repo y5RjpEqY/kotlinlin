@@ -49,6 +49,7 @@ class NewContentActivity : AppCompatActivity() {
         }
 
         createSpinner()
+        createAlarmSpinner()
     }
 
     private fun createSpinner(){
@@ -64,4 +65,19 @@ class NewContentActivity : AppCompatActivity() {
         spinner.adapter = adapter
 
     }
+
+    private fun createAlarmSpinner(){
+        var list = ArrayList<String>()
+//        TODO 任意の時間にしたいよね
+        list.add("5分前")
+        list.add("10分前")
+        list.add("30分前")
+        list.add("1時間前")
+        list.add("1日前")
+
+        var adapter = ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,list)
+        spinner_alarm.adapter = adapter
+
+    }
+
 }
