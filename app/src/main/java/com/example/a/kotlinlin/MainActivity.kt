@@ -6,14 +6,11 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import io.realm.Realm
-import io.realm.RealmConfiguration
-import io.realm.RealmObject
-import io.realm.RealmResults
+import io.realm.*
 
 class MainActivity : AppCompatActivity() {
-    var mRealm: Realm? = null
-    //var todoList = Model()
+    lateinit var mRealm: Realm
+    var myListener: RealmChangeListener<Realm>? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +28,13 @@ class MainActivity : AppCompatActivity() {
         val realm = Realm.getDefaultInstance()
         mRealm = realm
 
+        val list: RealmResults<Model> = realm.where(Model::class.java).findAll()
+        myListener = RealmChangeListener<Realm> {
+            //DBが書き換えられたときの処理を以下に書く
+            Log.v("change", "change shita")
+        }
+        realm.addChangeListener(myListener)
+
         button.setOnClickListener {
             //一旦モデルのインスタンスを作成してDBに登録する
             realm.executeTransaction {
@@ -45,7 +49,6 @@ class MainActivity : AppCompatActivity() {
                 Log.v("database records", query.size.toString())
             }
         }
-
     }
 
     override fun onDestroy() {
