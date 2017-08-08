@@ -4,6 +4,8 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.NotificationManagerCompat
+import android.support.v7.app.NotificationCompat
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
@@ -46,6 +48,15 @@ class NewContentActivity : AppCompatActivity() {
 
         add_btn.setOnClickListener{
 //            TODO 各データのバリデーション後、Realmオブジェクトに保存
+            val builder = NotificationCompat.Builder(applicationContext)
+            builder.setSmallIcon(R.mipmap.ic_launcher)
+            val manager = NotificationManagerCompat.from(applicationContext)
+            builder.setContentTitle("Title") // 1行目
+            builder.setContentText("Text") // 2行目
+            builder.setSubText("SubText") // 3行目
+            builder.setContentInfo("Info") // 右端
+//            builder.setWhen() // タイムスタンプ（現在時刻、メール受信時刻、カウントダウンなどに使用）
+            manager.notify(1, builder.build())
         }
 
         createSpinner()
