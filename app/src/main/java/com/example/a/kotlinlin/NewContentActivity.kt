@@ -1,7 +1,9 @@
 package com.example.a.kotlinlin
 
 import android.app.DatePickerDialog
+import android.app.Notification
 import android.app.TimePickerDialog
+import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.NotificationManagerCompat
@@ -55,7 +57,9 @@ class NewContentActivity : AppCompatActivity() {
             builder.setContentText("Text") // 2行目
             builder.setSubText("SubText") // 3行目
             builder.setContentInfo("Info") // 右端
-//            builder.setWhen() // タイムスタンプ（現在時刻、メール受信時刻、カウントダウンなどに使用）
+            builder.priority = 1
+            builder.setWhen(System.currentTimeMillis()) // タイムスタンプ（現在時刻、メール受信時刻、カウントダウンなどに使用）
+            builder.setDefaults(Notification.DEFAULT_VIBRATE)
             manager.notify(1, builder.build())
         }
 
