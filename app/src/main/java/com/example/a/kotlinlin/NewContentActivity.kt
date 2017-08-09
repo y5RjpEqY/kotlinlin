@@ -3,15 +3,12 @@ package com.example.a.kotlinlin
 import android.app.DatePickerDialog
 import android.app.Notification
 import android.app.TimePickerDialog
-import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.NotificationManagerCompat
 import android.support.v7.app.NotificationCompat
 import android.util.Log
 import android.widget.ArrayAdapter
-import android.widget.DatePicker
-import android.widget.TimePicker
 import kotlinx.android.synthetic.main.activity_new_content.*
 
 class NewContentActivity : AppCompatActivity() {
@@ -27,24 +24,24 @@ class NewContentActivity : AppCompatActivity() {
 
         date_btn.setOnClickListener{
             val newFragment = DatePick.newInstance()
-            newFragment.setListener(DatePickerDialog.OnDateSetListener(fun(_: DatePicker?, year_tmp: Int, month_tmp: Int, day_tmp: Int){
+            newFragment.setListener(DatePickerDialog.OnDateSetListener{ _ , year_tmp , month_tmp , day_tmp ->
                 year = year_tmp
                 month = month_tmp + 1
                 day = day_tmp
                 Log.w("date test","year = "+ year + " month = "+ month + " day = " + day)
                 date_tv.text = "" + year + "/" + month + "/" + day
-            }))
+            })
             newFragment.show(supportFragmentManager, "datePicker")
         }
 
         time_btm.setOnClickListener{
             val newFragment = TimePick.newInstance()
-            newFragment.setListener(TimePickerDialog.OnTimeSetListener(fun(_: TimePicker?, hour_tmp: Int, minute_tmp: Int){
+            newFragment.setListener(TimePickerDialog.OnTimeSetListener{ _ , hour_tmp , minute_tmp ->
                 hour = hour_tmp
                 minute = minute_tmp
                 Log.w("time test","hour = "+ hour + " minute = "+ minute)
                 time_tv.text = "" + hour + ":" + String.format("%02d",minute)
-            }))
+            })
             newFragment.show(supportFragmentManager, "timePicker")
         }
 
