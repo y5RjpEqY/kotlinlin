@@ -3,9 +3,7 @@ package com.example.a.kotlinlin
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
+import android.widget.*
 import io.realm.*
 
 class MainActivity : AppCompatActivity() {
@@ -20,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         //viewの要素を変数に代入
         val editText = findViewById(R.id.text) as EditText
         val listLabel = findViewById(R.id.count) as TextView
+        val listView = findViewById(R.id.list) as ListView
         val button = findViewById(R.id.countUpButton) as Button
 
         //インスタンス取得
@@ -28,10 +27,24 @@ class MainActivity : AppCompatActivity() {
         val realm = Realm.getDefaultInstance()
         mRealm = realm
 
-        val list: RealmResults<Model> = realm.where(Model::class.java).findAll()
+        val todoText: MutableList<String> = mutableListOf("")
+        realm.where(Model::class.java).findAll().forEach {
+            todoText.add(it.text)
+        }
+        todoText.removeAt(0)
+        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, todoText)
+        listView.adapter = adapter
+
         myListener = RealmChangeListener<Realm> {
             //DBが書き換えられたときの処理を以下に書く
             Log.v("change", "change shita")
+            val todoText: MutableList<String> = mutableListOf("")
+            realm.where(Model::class.java).findAll().forEach {
+                todoText.add(it.text)
+            }
+            todoText.removeAt(0)
+            val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, todoText)
+            listView.adapter = adapter
         }
         realm.addChangeListener(myListener)
 
