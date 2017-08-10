@@ -43,7 +43,7 @@ class NewContentActivity : AppCompatActivity() {
             })
             newFragment.show(supportFragmentManager, "timePicker")
         }
-
+        var i = 0
         add_btn.setOnClickListener{
 //            TODO 各データのバリデーション後、Realmオブジェクトに保存
 //            FIXME 以下、通知テスト
@@ -53,8 +53,10 @@ class NewContentActivity : AppCompatActivity() {
             calendar.add(Calendar.SECOND, 10)
 
             val intent = Intent(applicationContext, AlarmBroadcastReceiver::class.java)
-            intent.putExtra("intentId", 2)
-            val pending = PendingIntent.getBroadcast(applicationContext, 2 , intent, 0)
+            intent.putExtra("intentID", i)
+//            TODO AlarmのIDをセット 今はiで代用
+            i++
+            val pending = PendingIntent.getBroadcast(applicationContext, i , intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
             // アラームをセットする
             val am = getSystemService(ALARM_SERVICE) as AlarmManager
