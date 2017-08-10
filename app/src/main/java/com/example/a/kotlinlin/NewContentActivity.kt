@@ -25,6 +25,7 @@ class NewContentActivity : AppCompatActivity() {
         date_btn.setOnClickListener{
             val newFragment = DatePick.newInstance()
             newFragment.setListener(DatePickerDialog.OnDateSetListener{ _ , year_tmp , month_tmp , day_tmp ->
+//                TODO 直接Modelに突っ込んだほうがいいのかな
                 year = year_tmp
                 month = month_tmp + 1
                 day = day_tmp
@@ -47,6 +48,7 @@ class NewContentActivity : AppCompatActivity() {
 
         add_btn.setOnClickListener{
 //            TODO 各データのバリデーション後、Realmオブジェクトに保存
+//            FIXME 以下、通知テスト
             val builder = NotificationCompat.Builder(applicationContext)
             builder.setSmallIcon(R.mipmap.ic_launcher)
             val manager = NotificationManagerCompat.from(applicationContext)
