@@ -8,7 +8,9 @@ import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import android.widget.TimePicker
+import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_new_content.*
+import java.util.*
 
 class NewContentActivity : AppCompatActivity() {
     var year = 0
@@ -16,10 +18,18 @@ class NewContentActivity : AppCompatActivity() {
     var day = 0
     var hour = 0
     var minute = 0
+    lateinit var mRealm: Realm
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_content)
+
+        //realm
+        Realm.init(this)
+        val realm = Realm.getDefaultInstance()
+        mRealm = realm
+
+        val todoList = TodoListModel()
 
         date_btn.setOnClickListener{
             val newFragment = DatePick.newInstance()
@@ -29,6 +39,7 @@ class NewContentActivity : AppCompatActivity() {
                 day = day_tmp
                 Log.w("date test","year = "+ year + " month = "+ month + " day = " + day)
                 date_tv.text = "" + year + "/" + month + "/" + day
+                todoList.deadLine = GregorianCalendar(year, month, day).time
             }))
             newFragment.show(supportFragmentManager, "datePicker")
         }
@@ -46,6 +57,13 @@ class NewContentActivity : AppCompatActivity() {
 
         add_btn.setOnClickListener{
 //            TODO 各データのバリデーション後、Realmオブジェクトに保存
+            realm.executeTransaction {
+                todoList.todoText = editContent.text?.toString() ?: ""
+                realm.copyToRealm(todoList)
+                realm.where(TodoListModel::class.java).findAll().forEach {
+                    Log.v("add todo!", it.todoText + it.deadLine.toString())
+                }
+            }
         }
 
         createSpinner()

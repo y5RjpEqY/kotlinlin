@@ -22,8 +22,8 @@ class ItemListFragment : ListFragment(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         adapter = ItemListAdapter(activity)
+        //adapter.add("add")
         listAdapter = adapter
-        adapter.add("add")
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
