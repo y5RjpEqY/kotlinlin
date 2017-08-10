@@ -1,15 +1,13 @@
 package com.example.a.kotlinlin
 
-import android.app.DatePickerDialog
-import android.app.Notification
-import android.app.TimePickerDialog
+import android.app.*
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.app.NotificationManagerCompat
-import android.support.v7.app.NotificationCompat
 import android.util.Log
 import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.activity_new_content.*
+import java.util.*
 
 class NewContentActivity : AppCompatActivity() {
     var year = 0
@@ -49,17 +47,19 @@ class NewContentActivity : AppCompatActivity() {
         add_btn.setOnClickListener{
 //            TODO 各データのバリデーション後、Realmオブジェクトに保存
 //            FIXME 以下、通知テスト
-            val builder = NotificationCompat.Builder(applicationContext)
-            builder.setSmallIcon(R.mipmap.ic_launcher)
-            val manager = NotificationManagerCompat.from(applicationContext)
-            builder.setContentTitle("Title") // 1行目
-            builder.setContentText("Text") // 2行目
-            builder.setSubText("SubText") // 3行目
-            builder.setContentInfo("Info") // 右端
-            builder.priority = 1
-            builder.setWhen(System.currentTimeMillis()) // タイムスタンプ（現在時刻、メール受信時刻、カウントダウンなどに使用）
-            builder.setDefaults(Notification.DEFAULT_VIBRATE)
-            manager.notify(1, builder.build())
+            val calendar = Calendar.getInstance()
+            // 過去の時間は即実行されます
+//            TODO よしなに時間変更
+            calendar.add(Calendar.SECOND, 10)
+
+            val intent = Intent(applicationContext, AlarmBroadcastReceiver::class.java)
+            intent.putExtra("intentId", 2)
+            val pending = PendingIntent.getBroadcast(applicationContext, 2 , intent, 0)
+
+            // アラームをセットする
+            val am = getSystemService(ALARM_SERVICE) as AlarmManager
+//            TODO APIに応じて場合分け
+            am.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pending)
         }
 
         createSpinner()
